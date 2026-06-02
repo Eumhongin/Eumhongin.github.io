@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" id="meta-desc" content="엄홍인(Kevin) · 6년차 풀스택 개발자 포트폴리오 — React · React Native · TypeScript · Firebase">
 <title>엄홍인 — 포트폴리오</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@latest/dist/web/static/pretendard.min.css">
 <style>
@@ -36,6 +37,11 @@
   .case{padding-left:62px; text-indent:-62px;}
   .case b{color:var(--accent); font-weight:600; font-size:13.5px; display:inline-block;
     width:50px; text-indent:0;}
+  /* 영문 라벨(What I did/Highlights 등)은 50px에 안 맞아 줄바꿈 → 데스크톱에서만 폭 확장 */
+  @media(min-width:881px){
+    html[lang="en"] .case{padding-left:96px; text-indent:-96px;}
+    html[lang="en"] .case b{width:88px;}
+  }
   ul{margin:8px 0 0; padding-left:18px; color:var(--dim);} li{margin:5px 0; font-size:16px;}
   strong{color:#fff; font-weight:600;}
   table{border-collapse:collapse; width:100%; font-size:15px; margin-top:4px;}
@@ -53,212 +59,229 @@
   nav a{display:block; color:var(--dim2); font-size:14px; padding:6px 12px; border-radius:8px; transition:.15s;}
   nav a:hover{color:var(--txt); background:var(--panel);}
   nav a.active{color:#fff; background:var(--panel);}
+  /* Language toggle */
+  .lang-toggle{position:fixed; top:18px; right:20px; z-index:50; display:flex; gap:2px;
+    background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:3px;
+    box-shadow:0 2px 10px rgba(0,0,0,.35);}
+  .lang-toggle button{background:none; border:none; color:var(--dim2); font:inherit;
+    font-size:13px; font-weight:700; padding:5px 12px; border-radius:6px; cursor:pointer;
+    letter-spacing:.3px; transition:.15s;}
+  .lang-toggle button.active{background:var(--accent); color:#0d0d0f;}
+  .lang-toggle button:hover:not(.active){color:var(--txt);}
   @media(max-width:880px){
     .wrap{flex-direction:column; gap:0; padding:0 20px;} nav{display:none;}
     main{padding:40px 0 64px;} section{grid-template-columns:1fr; gap:12px; padding:28px 0;}
     .slabel{color:var(--accent);} header h1{font-size:30px;}
     .case{padding-left:0; text-indent:0;} .case b{display:block; width:auto; margin-bottom:1px;}
+    /* 모바일: 고정 대신 absolute → 스크롤 시 본문을 가리지 않음 (언어 선택은 상단에서) */
+    .lang-toggle{position:absolute; top:12px; right:12px;}
   }
 </style>
 </head>
 <body>
+
+<div class="lang-toggle" role="group" aria-label="Language">
+  <button type="button" data-lang="ko">KO</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+
 <div class="wrap">
 <main>
 
   <header>
-    <h1>엄홍인 <span class="en">Kevin</span></h1>
-    <div class="role">서비스 개발자 · 6년차 풀스택</div>
+    <h1 data-i18n="name">엄홍인 <span class="en">Kevin</span></h1>
+    <div class="role" data-i18n="role">서비스 개발자 · 6년차 풀스택</div>
     <div class="contact"><a href="mailto:collineum@gmail.com">collineum@gmail.com</a> · React · React Native · TypeScript · Firebase</div>
-    <p class="lead">6년차 풀스택 개발자입니다. 화면을 구현하는 데서 멈추지 않고, 데이터로 가설을 검증하며 제품을 성장시키는 일에 집중합니다.</p>
-    <p class="lead">스튜디오 헤이너츠(개발 총괄)와 Plang(프론트엔드 리드)을 거쳐, 써밋플레이에서 리드 개발자로 합류해 <strong>CTO</strong>까지 맡았습니다. React Native·React·TypeScript로 앱과 웹을 만들고 Firebase 기반 백엔드·배포 자동화까지, 기획부터 운영까지 서비스의 전 과정을 다뤘습니다.</p>
-    <p class="lead">가장 중요하게 생각하는 것은 <strong>데이터 기반 의사결정</strong>입니다. Mixpanel을 직접 도입해 사용자 플로우를 분석하고 가설을 빠르게 검증해 왔습니다. 일례로 리믹스 콘테스트 웹을 데이터 분석에 근거해 리뉴얼하여, 첫 화면 이탈률을 52%에서 절반으로 낮추고 한 달 만에 MAU를 2배로 늘렸습니다.</p>
-    <p class="lead">최근에는 <strong>AI를 개발 프로세스에 통합</strong>하는 데 집중합니다. 멀티 에이전트 개발 파이프라인·배포 자동화를 구축하고, 영상의 음성을 추출·요약해 학습 콘텐츠를 자동 생성하는 서비스 등 반복을 자동화하는 도구를 만들어 왔습니다.</p>
-    <p class="lead">복잡한 문제를 단순한 구조로 정리하고 팀 전체의 생산성을 높이는 개발자, 기술이 실제 비즈니스 가치로 이어지게 만드는 개발자가 되고자 합니다.</p>
+    <p class="lead" data-i18n="lead1">6년차 풀스택 개발자입니다. 화면을 구현하는 데서 멈추지 않고, 데이터로 가설을 검증하며 제품을 성장시키는 일에 집중합니다.</p>
+    <p class="lead" data-i18n="lead2">스튜디오 헤이너츠(개발 총괄)와 Plang(프론트엔드 리드)을 거쳐, 써밋플레이에서 리드 개발자로 합류해 <strong>CTO</strong>까지 맡았습니다. React Native·React·TypeScript로 앱과 웹을 만들고 Firebase 기반 백엔드·배포 자동화까지, 기획부터 운영까지 서비스의 전 과정을 다뤘습니다.</p>
+    <p class="lead" data-i18n="lead3">가장 중요하게 생각하는 것은 <strong>데이터 기반 의사결정</strong>입니다. Mixpanel을 직접 도입해 사용자 플로우를 분석하고 가설을 빠르게 검증해 왔습니다. 일례로 리믹스 콘테스트 웹을 데이터 분석에 근거해 리뉴얼하여, 첫 화면 이탈률을 52%에서 절반으로 낮추고 한 달 만에 MAU를 2배로 늘렸습니다.</p>
+    <p class="lead" data-i18n="lead4">최근에는 <strong>AI를 개발 프로세스에 통합</strong>하는 데 집중합니다. 멀티 에이전트 개발 파이프라인·배포 자동화를 구축하고, 영상의 음성을 추출·요약해 학습 콘텐츠를 자동 생성하는 서비스 등 반복을 자동화하는 도구를 만들어 왔습니다.</p>
+    <p class="lead" data-i18n="lead5">복잡한 문제를 단순한 구조로 정리하고 팀 전체의 생산성을 높이는 개발자, 기술이 실제 비즈니스 가치로 이어지게 만드는 개발자가 되고자 합니다.</p>
   </header>
 
   <section id="achievements">
-    <div class="slabel">대표 성과</div>
+    <div class="slabel" data-i18n="sl-ach">대표 성과</div>
     <div class="scontent">
       <table>
-        <tr><td class="k">무료예약 성공률 99.6%</td><td class="v">매장 음악 예약 핵심 플로우, 시도→성공 99.63%·평균 4초·실패율 0.37%</td></tr>
-        <tr><td class="k">무료예약 5.1배 성장</td><td class="v">주 ~1,600건 → ~8,200건, 고점 도달 후 6개월 안정 유지</td></tr>
-        <tr><td class="k">리믹스 웹 리뉴얼</td><td class="v">데이터 분석 기반 개편으로 첫 화면 이탈률 52%→절반, MAU 1개월 2배</td></tr>
-        <tr><td class="k">앱 MAU 성장</td><td class="v">단계적 수익화 실험으로 커뮤니티 5k → 음원 경매 7k → 리믹스 콘테스트 15k</td></tr>
-        <tr><td class="k">5개 서비스 통합 백엔드</td><td class="v">고객·광고·어드민·파트너스·공개 API를 단일 백엔드로 통합 운영</td></tr>
-        <tr><td class="k">무중단 DB 마이그레이션</td><td class="v">운영 중인 RTDB → Firestore를 이중화로 서비스 중단 없이 이전</td></tr>
+        <tr><td class="k" data-i18n="ach1k">무료예약 성공률 99.6%</td><td class="v" data-i18n="ach1v">매장 음악 예약 핵심 플로우, 시도→성공 99.63%·평균 4초·실패율 0.37%</td></tr>
+        <tr><td class="k" data-i18n="ach2k">무료예약 5.1배 성장</td><td class="v" data-i18n="ach2v">주 ~1,600건 → ~8,200건, 고점 도달 후 6개월 안정 유지</td></tr>
+        <tr><td class="k" data-i18n="ach3k">리믹스 웹 리뉴얼</td><td class="v" data-i18n="ach3v">데이터 분석 기반 개편으로 첫 화면 이탈률 52%→절반, MAU 1개월 2배</td></tr>
+        <tr><td class="k" data-i18n="ach4k">앱 MAU 성장</td><td class="v" data-i18n="ach4v">단계적 수익화 실험으로 커뮤니티 5k → 음원 경매 7k → 리믹스 콘테스트 15k</td></tr>
+        <tr><td class="k" data-i18n="ach5k">5개 서비스 통합 백엔드</td><td class="v" data-i18n="ach5v">고객·광고·어드민·파트너스·공개 API를 단일 백엔드로 통합 운영</td></tr>
+        <tr><td class="k" data-i18n="ach6k">무중단 DB 마이그레이션</td><td class="v" data-i18n="ach6v">운영 중인 RTDB → Firestore를 이중화로 서비스 중단 없이 이전</td></tr>
       </table>
     </div>
   </section>
 
   <section id="career">
-    <div class="slabel">경력</div>
+    <div class="slabel" data-i18n="sl-career">경력</div>
     <div class="scontent">
       <div class="item">
-        <span class="period">2021.11 ~ 2026.04 · 4년 6개월</span>
-        <h3>써밋플레이</h3>
-        <div class="org">프론트엔드 → 리드 → PM → CTO (2023.05)</div>
+        <span class="period" data-i18n="c1per">2021.11 ~ 2026.04 · 4년 6개월</span>
+        <h3 data-i18n="c1h3">써밋플레이</h3>
+        <div class="org" data-i18n="c1org">프론트엔드 → 리드 → PM → CTO (2023.05)</div>
         <ul>
-          <li>음원/음악 예약 플랫폼의 앱·웹·서버를 사실상 단독으로 설계·개발·운영</li>
-          <li>Mixpanel을 직접 도입해 데이터 기반으로 단계적 수익화를 실험하며 MAU 성장 견인</li>
-          <li>모바일 앱 → 웹 전환 → 통합 플랫폼(틀어봐)까지 제품 진화 주도</li>
+          <li data-i18n="c1l1">음원/음악 예약 플랫폼의 앱·웹·서버를 사실상 단독으로 설계·개발·운영</li>
+          <li data-i18n="c1l2">Mixpanel을 직접 도입해 데이터 기반으로 단계적 수익화를 실험하며 MAU 성장 견인</li>
+          <li data-i18n="c1l3">모바일 앱 → 웹 전환 → 통합 플랫폼(틀어봐)까지 제품 진화 주도</li>
         </ul>
       </div>
       <div class="item">
-        <span class="period">2021.06 ~ 2021.10</span>
-        <h3>Plang</h3>
-        <div class="org">프론트엔드 리드</div>
+        <span class="period" data-i18n="c2per">2021.06 ~ 2021.10</span>
+        <h3 data-i18n="c2h3">Plang</h3>
+        <div class="org" data-i18n="c2org">프론트엔드 리드</div>
         <ul>
-          <li>Mixpanel 기반 데이터 드리븐 개발, B2B 웹(React·Redux·Firebase Hosting·GitHub Actions CI/CD·NIVO)</li>
-          <li>레거시 JS→TypeScript, Class→Function 컴포넌트 전환 주도, Container-Presenter 패턴 도입</li>
+          <li data-i18n="c2l1">Mixpanel 기반 데이터 드리븐 개발, B2B 웹(React·Redux·Firebase Hosting·GitHub Actions CI/CD·NIVO)</li>
+          <li data-i18n="c2l2">레거시 JS→TypeScript, Class→Function 컴포넌트 전환 주도, Container-Presenter 패턴 도입</li>
         </ul>
       </div>
       <div class="item">
-        <span class="period">2019.10 ~ 2021.05</span>
-        <h3>스튜디오 헤이너츠</h3>
-        <div class="org">개발 총괄</div>
-        <p>첫 개발자로 입사, React+Redux+Firebase+Node 풀스택 SI. 사내 개발자 교육·팀 구성, PM으로 프로덕트 완성 리딩.</p>
+        <span class="period" data-i18n="c3per">2019.10 ~ 2021.05</span>
+        <h3 data-i18n="c3h3">스튜디오 헤이너츠</h3>
+        <div class="org" data-i18n="c3org">개발 총괄</div>
+        <p data-i18n="c3p">첫 개발자로 입사, React+Redux+Firebase+Node 풀스택 SI. 사내 개발자 교육·팀 구성, PM으로 프로덕트 완성 리딩.</p>
       </div>
     </div>
   </section>
 
   <section id="journey">
-    <div class="slabel">기술 여정</div>
+    <div class="slabel" data-i18n="sl-journey">기술 여정</div>
     <div class="scontent">
-      <div class="item"><h3>2019–2021 · 풀스택 SI 입문 <span class="org">스튜디오 헤이너츠</span></h3><p>React+Firebase+Node로 클라이언트 프로젝트 개발. 첫 개발자로 입사해 팀 구성·교육.</p></div>
-      <div class="item"><h3>2021 · 데이터 드리븐 개발 <span class="org">Plang</span></h3><p>Mixpanel 기반 운영·개선, B2B 웹 개발(CI/CD·NIVO), JS→TS·컴포넌트 전환.</p></div>
-      <div class="item"><h3>2021–2023 · 모바일 앱 (RN) <span class="org">써밋플레이 1기</span></h3><p>음원 거래·커뮤니티 앱. 프로토타입 → 메인 앱 → 리뉴얼.</p></div>
-      <div class="item"><h3>2022–2025 · 웹 전환 + Firebase 인프라 <span class="org">써밋플레이 2기</span></h3><p>리믹스 콘테스트 플랫폼, 마켓 전자계약, 백엔드 서버 구축.</p></div>
-      <div class="item"><h3>2024–2026 · 통합 플랫폼 <span class="org">써밋플레이 3기</span></h3><p>고객·어드민·파트너스 + 광고 + 통합 백엔드. 1인 풀스택 리드.</p></div>
+      <div class="item"><h3 data-i18n="j1h">2019–2021 · 풀스택 SI 입문 <span class="org">스튜디오 헤이너츠</span></h3><p data-i18n="j1p">React+Firebase+Node로 클라이언트 프로젝트 개발. 첫 개발자로 입사해 팀 구성·교육.</p></div>
+      <div class="item"><h3 data-i18n="j2h">2021 · 데이터 드리븐 개발 <span class="org">Plang</span></h3><p data-i18n="j2p">Mixpanel 기반 운영·개선, B2B 웹 개발(CI/CD·NIVO), JS→TS·컴포넌트 전환.</p></div>
+      <div class="item"><h3 data-i18n="j3h">2021–2023 · 모바일 앱 (RN) <span class="org">써밋플레이 1기</span></h3><p data-i18n="j3p">음원 거래·커뮤니티 앱. 프로토타입 → 메인 앱 → 리뉴얼.</p></div>
+      <div class="item"><h3 data-i18n="j4h">2022–2025 · 웹 전환 + Firebase 인프라 <span class="org">써밋플레이 2기</span></h3><p data-i18n="j4p">리믹스 콘테스트 플랫폼, 마켓 전자계약, 백엔드 서버 구축.</p></div>
+      <div class="item"><h3 data-i18n="j5h">2024–2026 · 통합 플랫폼 <span class="org">써밋플레이 3기</span></h3><p data-i18n="j5p">고객·어드민·파트너스 + 광고 + 통합 백엔드. 1인 풀스택 리드.</p></div>
     </div>
   </section>
 
   <section id="p-server">
-    <div class="slabel">프로젝트<br>통합 서버</div>
+    <div class="slabel" data-i18n="sl-pserver">프로젝트<br>통합 서버</div>
     <div class="scontent">
       <div class="item">
         <span class="period">2024.08 ~ 2026.04</span>
-        <h3>음악 예약 플랫폼 통합 서버 <span class="org">· 백엔드 단독 설계·운영</span></h3>
-        <p class="case"><b>배경</b> 고객·광고·어드민·파트너스·공개 API 5개 서비스가 하나의 백엔드를 공유했고, 레거시 RTDB는 비용과 쿼리 확장에 한계가 있었다.</p>
-        <p class="case"><b>한 일</b> 5개 서비스를 도메인 라우터로 분리한 단일 Firebase Functions 백엔드로 통합. 운영 중인 RTDB를 Firestore로 옮기되 두 DB를 동시에 쓰는 이중화(미러링)로 무중단 전환을 설계. 예약·정산·광고 영상 등 반복 작업을 스케줄러·트리거로 자동화.</p>
-        <p class="case"><b>결과</b> 서비스 중단 없이 마이그레이션을 진행, 스케줄러 메모리(OOM) 팽창 원인을 제거해 중복 실행을 차단.</p>
-        <div class="chips"><span class="chip">Firebase Functions + Express</span><span class="chip">RTDB + Firestore 이중화</span><span class="chip">토스페이먼츠</span></div>
+        <h3 data-i18n="ps-h3">음악 예약 플랫폼 통합 서버 <span class="org">· 백엔드 단독 설계·운영</span></h3>
+        <p class="case" data-i18n="ps-bg"><b>배경</b> 고객·광고·어드민·파트너스·공개 API 5개 서비스가 하나의 백엔드를 공유했고, 레거시 RTDB는 비용과 쿼리 확장에 한계가 있었다.</p>
+        <p class="case" data-i18n="ps-done"><b>한 일</b> 5개 서비스를 도메인 라우터로 분리한 단일 Firebase Functions 백엔드로 통합. 운영 중인 RTDB를 Firestore로 옮기되 두 DB를 동시에 쓰는 이중화(미러링)로 무중단 전환을 설계. 예약·정산·광고 영상 등 반복 작업을 스케줄러·트리거로 자동화.</p>
+        <p class="case" data-i18n="ps-res"><b>결과</b> 서비스 중단 없이 마이그레이션을 진행, 스케줄러 메모리(OOM) 팽창 원인을 제거해 중복 실행을 차단.</p>
+        <div class="chips" data-i18n="ps-chips"><span class="chip">Firebase Functions + Express</span><span class="chip">RTDB + Firestore 이중화</span><span class="chip">토스페이먼츠</span></div>
       </div>
     </div>
   </section>
 
   <section id="p-client">
-    <div class="slabel">프로젝트<br>음악 예약</div>
+    <div class="slabel" data-i18n="sl-pclient">프로젝트<br>음악 예약</div>
     <div class="scontent">
       <div class="item">
         <span class="period">2024.08 ~ 2026.04</span>
-        <h3>매장 음악 예약 서비스 <span class="org">· React · 단독 개발</span></h3>
-        <p class="case"><b>배경</b> 고객이 QR로 매장에 진입해 음악을 예약하는 핵심 플로우. 스토어·플레이리스트·검색 등 진입점이 제각각이라 경로마다 동작·실패 처리가 달라 유지보수가 어려웠다.</p>
-        <p class="case"><b>한 일</b> 모든 진입점을 단일 예약 게이트웨이 컴포넌트로 통합. 결제 상태 전이(승인/완료/실패)를 페이지로 분리. PWA·매장별 동적 단가를 적용.</p>
-        <p class="case"><b>결과</b> 진입 경로와 무관하게 일관된 예약 경험을 확보.</p>
-        <div class="metric">무료예약 시도→성공 99.6% · 평균 4초 · 트래픽 5배 성장 중에도 유지</div>
-        <div class="chips"><span class="chip">React 18</span><span class="chip">Redux Toolkit</span><span class="chip">토스 Payment Widget</span><span class="chip">PWA(Workbox)</span></div>
+        <h3 data-i18n="pc-h3">매장 음악 예약 서비스 <span class="org">· React · 단독 개발</span></h3>
+        <p class="case" data-i18n="pc-bg"><b>배경</b> 고객이 QR로 매장에 진입해 음악을 예약하는 핵심 플로우. 스토어·플레이리스트·검색 등 진입점이 제각각이라 경로마다 동작·실패 처리가 달라 유지보수가 어려웠다.</p>
+        <p class="case" data-i18n="pc-done"><b>한 일</b> 모든 진입점을 단일 예약 게이트웨이 컴포넌트로 통합. 결제 상태 전이(승인/완료/실패)를 페이지로 분리. PWA·매장별 동적 단가를 적용.</p>
+        <p class="case" data-i18n="pc-res"><b>결과</b> 진입 경로와 무관하게 일관된 예약 경험을 확보.</p>
+        <div class="metric" data-i18n="pc-metric">무료예약 시도→성공 99.6% · 평균 4초 · 트래픽 5배 성장 중에도 유지</div>
+        <div class="chips" data-i18n="pc-chips"><span class="chip">React 18</span><span class="chip">Redux Toolkit</span><span class="chip">토스 Payment Widget</span><span class="chip">PWA(Workbox)</span></div>
       </div>
     </div>
   </section>
 
   <section id="p-ads">
-    <div class="slabel">프로젝트<br>광고 캠페인</div>
+    <div class="slabel" data-i18n="sl-pads">프로젝트<br>광고 캠페인</div>
     <div class="scontent">
       <div class="item">
         <span class="period">2025.06 ~ 2026.04</span>
-        <h3>광고 캠페인 서비스 <span class="org">· React · 단독 개발</span></h3>
-        <p class="case"><b>배경</b> 광고주가 캠페인을 만들고 성과를 확인하며 광고비를 결제하는 B2B 도구가 필요했다.</p>
-        <p class="case"><b>한 일</b> 복잡한 캠페인 생성 과정을 단계별 마법사(라우트)로 구조화. 캠페인 유형별(Premium/Basic/JustPlay) 성과를 차트로 시각화. 토스페이먼츠 SDK v2로 결제 연동.</p>
-        <p class="case"><b>결과</b> 광고주가 성과를 직관적으로 파악하는 대시보드와 결제 완결 플로우를 제공.</p>
-        <div class="chips"><span class="chip">React 18</span><span class="chip">Recharts</span><span class="chip">Nivo</span><span class="chip">토스 SDK v2</span></div>
+        <h3 data-i18n="pa-h3">광고 캠페인 서비스 <span class="org">· React · 단독 개발</span></h3>
+        <p class="case" data-i18n="pa-bg"><b>배경</b> 광고주가 캠페인을 만들고 성과를 확인하며 광고비를 결제하는 B2B 도구가 필요했다.</p>
+        <p class="case" data-i18n="pa-done"><b>한 일</b> 복잡한 캠페인 생성 과정을 단계별 마법사(라우트)로 구조화. 캠페인 유형별(Premium/Basic/JustPlay) 성과를 차트로 시각화. 토스페이먼츠 SDK v2로 결제 연동.</p>
+        <p class="case" data-i18n="pa-res"><b>결과</b> 광고주가 성과를 직관적으로 파악하는 대시보드와 결제 완결 플로우를 제공.</p>
+        <div class="chips" data-i18n="pa-chips"><span class="chip">React 18</span><span class="chip">Recharts</span><span class="chip">Nivo</span><span class="chip">토스 SDK v2</span></div>
       </div>
     </div>
   </section>
 
   <section id="p-mobile">
-    <div class="slabel">프로젝트<br>모바일 앱</div>
+    <div class="slabel" data-i18n="sl-pmobile">프로젝트<br>모바일 앱</div>
     <div class="scontent">
       <div class="item">
         <span class="period">2021.11 ~ 2023.05</span>
-        <h3>음악 아티스트·팬 모바일 앱 <span class="org">· React Native · 공동 개발(리뉴얼 단독)</span></h3>
-        <p class="case"><b>배경</b> 아티스트/팬 커뮤니티와 음원 거래를 결합한 앱이 회사 초기 핵심 제품이었다.</p>
-        <p class="case"><b>한 일</b> 실시간 음원 경매, 양수·양도 계약을 위한 전자 서명, 채팅·댓글, 소셜 로그인(Apple/Google/Kakao), FCM 푸시·딥링킹, 영상·음원 재생을 구현. 프로토타입부터 메인 앱·리뉴얼까지 참여.</p>
-        <p class="case"><b>결과</b> 단계적 수익화 실험으로 MAU 5k → 15k 성장을 견인.</p>
-        <div class="chips"><span class="chip">React Native</span><span class="chip">실시간 음원 경매</span><span class="chip">전자 서명</span><span class="chip">실시간 채팅</span><span class="chip">FCM</span></div>
+        <h3 data-i18n="pm-h3">음악 아티스트·팬 모바일 앱 <span class="org">· React Native · 공동 개발(리뉴얼 단독)</span></h3>
+        <p class="case" data-i18n="pm-bg"><b>배경</b> 아티스트/팬 커뮤니티와 음원 거래를 결합한 앱이 회사 초기 핵심 제품이었다.</p>
+        <p class="case" data-i18n="pm-done"><b>한 일</b> 실시간 음원 경매, 양수·양도 계약을 위한 전자 서명, 채팅·댓글, 소셜 로그인(Apple/Google/Kakao), FCM 푸시·딥링킹, 영상·음원 재생을 구현. 프로토타입부터 메인 앱·리뉴얼까지 참여.</p>
+        <p class="case" data-i18n="pm-res"><b>결과</b> 단계적 수익화 실험으로 MAU 5k → 15k 성장을 견인.</p>
+        <div class="chips" data-i18n="pm-chips"><span class="chip">React Native</span><span class="chip">실시간 음원 경매</span><span class="chip">전자 서명</span><span class="chip">실시간 채팅</span><span class="chip">FCM</span></div>
       </div>
     </div>
   </section>
 
   <section id="p-remix">
-    <div class="slabel">프로젝트<br>리믹스 콘테스트</div>
+    <div class="slabel" data-i18n="sl-premix">프로젝트<br>리믹스 콘테스트</div>
     <div class="scontent">
       <div class="item">
         <span class="period">2023.05 ~ 2024.07</span>
-        <h3>리믹스(Remix) 콘테스트 플랫폼 <span class="org">· React · 단독 개발</span></h3>
-        <p class="case"><b>배경</b> 미발매 음원 시장을 알리기 위해, 원곡을 편곡(리믹스)해 겨루는 음악 콘테스트가 필요했다.</p>
-        <p class="case"><b>한 일</b> 콘테스트 개최 → 유저가 원곡 편곡본을 업로드 → 프로듀서가 평가·랭킹을 매기는 경연 플랫폼을 단독 개발. (편곡 출품·심사·랭킹, skiomusic 형태)</p>
-        <p class="case"><b>결과</b> 데이터 분석 기반 리뉴얼로 첫 화면 이탈률 52%→절반, MAU 1개월 2배 — 앱 MAU 15k 견인.</p>
+        <h3 data-i18n="pr-h3">리믹스(Remix) 콘테스트 플랫폼 <span class="org">· React · 단독 개발</span></h3>
+        <p class="case" data-i18n="pr-bg"><b>배경</b> 미발매 음원 시장을 알리기 위해, 원곡을 편곡(리믹스)해 겨루는 음악 콘테스트가 필요했다.</p>
+        <p class="case" data-i18n="pr-done"><b>한 일</b> 콘테스트 개최 → 유저가 원곡 편곡본을 업로드 → 프로듀서가 평가·랭킹을 매기는 경연 플랫폼을 단독 개발. (편곡 출품·심사·랭킹, skiomusic 형태)</p>
+        <p class="case" data-i18n="pr-res"><b>결과</b> 데이터 분석 기반 리뉴얼로 첫 화면 이탈률 52%→절반, MAU 1개월 2배 — 앱 MAU 15k 견인.</p>
         <div class="chips"><span class="chip">React 18</span><span class="chip">React Query</span><span class="chip">Redux</span><span class="chip">Firebase</span><span class="chip">Tailwind</span></div>
       </div>
     </div>
   </section>
 
   <section id="p-support">
-    <div class="slabel">프로젝트<br>그 외 (단독)</div>
+    <div class="slabel" data-i18n="sl-psupport">프로젝트<br>그 외 (단독)</div>
     <div class="scontent">
       <div class="item">
-        <h3>마켓 입점 계약 웹 <span class="org">· React</span></h3>
-        <p class="case"><b>한 일</b> 매장 입점·계약 웹을 단독 개발. 계약서 관리·<strong>전자 서명</strong>·열람 이력 추적까지 법적 효력이 필요한 문서 플로우를 구현.</p>
+        <h3 data-i18n="su1h">마켓 입점 계약 웹 <span class="org">· React</span></h3>
+        <p class="case" data-i18n="su1d"><b>한 일</b> 매장 입점·계약 웹을 단독 개발. 계약서 관리·<strong>전자 서명</strong>·열람 이력 추적까지 법적 효력이 필요한 문서 플로우를 구현.</p>
       </div>
       <div class="item">
-        <h3>틀어봐 어드민 <span class="org">· React</span></h3>
-        <p class="case"><b>한 일</b> 광고·배너·캠페인·아티스트·리워드 상품을 한 곳에서 관리하는 운영 어드민을 단독 개발.</p>
+        <h3 data-i18n="su2h">틀어봐 어드민 <span class="org">· React</span></h3>
+        <p class="case" data-i18n="su2d"><b>한 일</b> 광고·배너·캠페인·아티스트·리워드 상품을 한 곳에서 관리하는 운영 어드민을 단독 개발.</p>
       </div>
       <div class="item">
-        <h3>틀어봐 파트너스 <span class="org">· React</span></h3>
-        <p class="case"><b>한 일</b> 매장 사장님이 자기 매장을 관리하는 B2B 웹을 단독 개발.</p>
+        <h3 data-i18n="su3h">틀어봐 파트너스 <span class="org">· React</span></h3>
+        <p class="case" data-i18n="su3d"><b>한 일</b> 매장 사장님이 자기 매장을 관리하는 B2B 웹을 단독 개발.</p>
       </div>
     </div>
   </section>
 
   <section id="prev">
-    <div class="slabel">이전 경력<br>Plang·헤이너츠</div>
+    <div class="slabel" data-i18n="sl-prev">이전 경력<br>Plang·헤이너츠</div>
     <div class="scontent">
       <div class="item">
         <span class="period">2021.06 ~ 2021.10</span>
-        <h3>B2B 데이터 웹 · 앱 현대화 <span class="org">· Plang · 프론트엔드 리드</span></h3>
-        <p class="case"><b>배경</b> 사내·고객·학교·선생님용 여러 프로덕트를 운영하며 데이터 기반으로 개선해야 했고, 레거시 코드는 JS·Class 컴포넌트라 협업·온보딩이 어려웠다.</p>
-        <p class="case"><b>한 일</b> Mixpanel로 사용자 플로우를 분석해 개선 우선순위를 잡고, 레거시 JS→TypeScript·Class→Function 컴포넌트 전환을 주도. B2B 웹을 React·Redux로 개발하고 Firebase Hosting + GitHub Actions로 CI/CD를 구성, NIVO로 데이터를 시각화. Container-Presenter 패턴 적용.</p>
-        <p class="case"><b>결과</b> 데이터 기반 개선 사이클과 코드 현대화로 협업·온보딩 효율을 높임.</p>
-        <div class="chips"><span class="chip">React·Redux</span><span class="chip">TypeScript 전환</span><span class="chip">GitHub Actions CI/CD</span><span class="chip">NIVO</span></div>
+        <h3 data-i18n="pv1h3">B2B 데이터 웹 · 앱 현대화 <span class="org">· Plang · 프론트엔드 리드</span></h3>
+        <p class="case" data-i18n="pv1bg"><b>배경</b> 사내·고객·학교·선생님용 여러 프로덕트를 운영하며 데이터 기반으로 개선해야 했고, 레거시 코드는 JS·Class 컴포넌트라 협업·온보딩이 어려웠다.</p>
+        <p class="case" data-i18n="pv1done"><b>한 일</b> Mixpanel로 사용자 플로우를 분석해 개선 우선순위를 잡고, 레거시 JS→TypeScript·Class→Function 컴포넌트 전환을 주도. B2B 웹을 React·Redux로 개발하고 Firebase Hosting + GitHub Actions로 CI/CD를 구성, NIVO로 데이터를 시각화. Container-Presenter 패턴 적용.</p>
+        <p class="case" data-i18n="pv1res"><b>결과</b> 데이터 기반 개선 사이클과 코드 현대화로 협업·온보딩 효율을 높임.</p>
+        <div class="chips" data-i18n="pv1chips"><span class="chip">React·Redux</span><span class="chip">TypeScript 전환</span><span class="chip">GitHub Actions CI/CD</span><span class="chip">NIVO</span></div>
       </div>
       <div class="item">
         <span class="period">2019.10 ~ 2021.05</span>
-        <h3>풀스택 SI 개발 · 팀 빌딩 <span class="org">· 스튜디오 헤이너츠 · 개발 총괄</span></h3>
-        <p class="case"><b>배경</b> 디자인 스튜디오의 첫 개발자로 입사해, 클라이언트 프로젝트를 0부터 구축하고 개발 조직을 만들어야 했다.</p>
-        <p class="case"><b>한 일</b> React·Redux + Firebase·Node.js로 웹·앱·서버를 풀스택 개발. 사내 인력을 교육해 팀을 구성하고 PM으로 프로젝트를 리딩.</p>
-        <p class="case"><b>주요</b> <strong>프로젝트퀘스천</strong> — 저널리스트 크라우드펀딩 플랫폼(클라이언트 웹·관리 오피스·서버 단독 개발; 결제 서버, 펀딩 자동 종료·통계 스케줄러, PG 연동). <strong>포스트잇</strong> — 성향 기반 추천 SNS(앱·스토어웹·오피스; 성향 수치화 추천 알고리즘·API·DevOps·PM). 외 취향살롱(실버세대 B2C 커머스·결제), Steadee 등.</p>
-        <div class="chips"><span class="chip">React·React Native</span><span class="chip">Firebase·Node.js</span><span class="chip">크라우드펀딩·결제 서버</span><span class="chip">추천 알고리즘</span><span class="chip">팀 빌딩·PM</span></div>
+        <h3 data-i18n="pv2h3">풀스택 SI 개발 · 팀 빌딩 <span class="org">· 스튜디오 헤이너츠 · 개발 총괄</span></h3>
+        <p class="case" data-i18n="pv2bg"><b>배경</b> 디자인 스튜디오의 첫 개발자로 입사해, 클라이언트 프로젝트를 0부터 구축하고 개발 조직을 만들어야 했다.</p>
+        <p class="case" data-i18n="pv2done"><b>한 일</b> React·Redux + Firebase·Node.js로 웹·앱·서버를 풀스택 개발. 사내 인력을 교육해 팀을 구성하고 PM으로 프로젝트를 리딩.</p>
+        <p class="case" data-i18n="pv2major"><b>주요</b> <strong>프로젝트퀘스천</strong> — 저널리스트 크라우드펀딩 플랫폼(클라이언트 웹·관리 오피스·서버 단독 개발; 결제 서버, 펀딩 자동 종료·통계 스케줄러, PG 연동). <strong>포스트잇</strong> — 성향 기반 추천 SNS(앱·스토어웹·오피스; 성향 수치화 추천 알고리즘·API·DevOps·PM). 외 취향살롱(실버세대 B2C 커머스·결제), Steadee 등.</p>
+        <div class="chips" data-i18n="pv2chips"><span class="chip">React·React Native</span><span class="chip">Firebase·Node.js</span><span class="chip">크라우드펀딩·결제 서버</span><span class="chip">추천 알고리즘</span><span class="chip">팀 빌딩·PM</span></div>
       </div>
     </div>
   </section>
 
   <section id="side">
-    <div class="slabel">사이드<br>자동화·AI</div>
+    <div class="slabel" data-i18n="sl-side">사이드<br>자동화·AI</div>
     <div class="scontent">
       <div class="item">
-        <h3>AI 학습 콘텐츠 자동 생성</h3>
-        <p class="case"><b>배경</b> 강사로 일하는 지인의 수업 준비를 돕고 싶었다.</p>
-        <p class="case"><b>한 일</b> 유튜브 영상에서 오디오를 추출하고 OpenAI Whisper로 텍스트화(STT)한 뒤, GPT로 개념 설명·OX 퀴즈를 자동 생성하는 파이프라인을 구축.</p>
+        <h3 data-i18n="sd1h">AI 학습 콘텐츠 자동 생성</h3>
+        <p class="case" data-i18n="sd1bg"><b>배경</b> 강사로 일하는 지인의 수업 준비를 돕고 싶었다.</p>
+        <p class="case" data-i18n="sd1done"><b>한 일</b> 유튜브 영상에서 오디오를 추출하고 OpenAI Whisper로 텍스트화(STT)한 뒤, GPT로 개념 설명·OX 퀴즈를 자동 생성하는 파이프라인을 구축.</p>
       </div>
       <div class="item">
-        <h3>노코드 앱 빌더</h3>
-        <p class="case"><b>배경</b> 프로그래밍을 몰라도 누구나 앱을 만들 수 있게 하고 싶었다.</p>
-        <p class="case"><b>한 일</b> 테마 컴포넌트 시스템과 코드 제너레이터로 설정값을 React Native 앱 소스로 자동 생성·빌드. Figma 디자인을 RN으로 전환하는 방향도 연구.</p>
+        <h3 data-i18n="sd2h">노코드 앱 빌더</h3>
+        <p class="case" data-i18n="sd2bg"><b>배경</b> 프로그래밍을 몰라도 누구나 앱을 만들 수 있게 하고 싶었다.</p>
+        <p class="case" data-i18n="sd2done"><b>한 일</b> 테마 컴포넌트 시스템과 코드 제너레이터로 설정값을 React Native 앱 소스로 자동 생성·빌드. Figma 디자인을 RN으로 전환하는 방향도 연구.</p>
       </div>
       <div class="item">
-        <h3>그리니시 — 친환경 매거진 + 제로웨이스트 마켓</h3>
-        <p class="case"><b>한 일</b> 환경 기사를 작성·발행하는 매거진과 친환경 상점 큐레이션 마켓을 개발. 작성/노출 웹을 분리해 멀티 타겟으로 운영하고, 접근성(다크모드·폰트)을 우선 구현.</p>
+        <h3 data-i18n="sd3h">그리니시 — 친환경 매거진 + 제로웨이스트 마켓</h3>
+        <p class="case" data-i18n="sd3done"><b>한 일</b> 환경 기사를 작성·발행하는 매거진과 친환경 상점 큐레이션 마켓을 개발. 작성/노출 웹을 분리해 멀티 타겟으로 운영하고, 접근성(다크모드·폰트)을 우선 구현.</p>
       </div>
     </div>
   </section>
@@ -266,23 +289,168 @@
 </main>
 
 <nav>
-  <div class="grp">개요</div>
-  <a href="#achievements">대표 성과</a>
-  <a href="#career">경력</a>
-  <a href="#journey">기술 여정</a>
-  <div class="grp">프로젝트</div>
-  <a href="#p-server">통합 서버</a>
-  <a href="#p-client">음악 예약</a>
-  <a href="#p-ads">광고 캠페인</a>
-  <a href="#p-mobile">모바일 앱</a>
-  <a href="#p-remix">리믹스 콘테스트</a>
-  <a href="#p-support">그 외</a>
-  <a href="#prev">이전 경력</a>
-  <a href="#side">사이드·AI</a>
+  <div class="grp" data-i18n="nv-g1">개요</div>
+  <a href="#achievements" data-i18n="nv-ach">대표 성과</a>
+  <a href="#career" data-i18n="nv-career">경력</a>
+  <a href="#journey" data-i18n="nv-journey">기술 여정</a>
+  <div class="grp" data-i18n="nv-g2">프로젝트</div>
+  <a href="#p-server" data-i18n="nv-pserver">통합 서버</a>
+  <a href="#p-client" data-i18n="nv-pclient">음악 예약</a>
+  <a href="#p-ads" data-i18n="nv-pads">광고 캠페인</a>
+  <a href="#p-mobile" data-i18n="nv-pmobile">모바일 앱</a>
+  <a href="#p-remix" data-i18n="nv-premix">리믹스 콘테스트</a>
+  <a href="#p-support" data-i18n="nv-psupport">그 외</a>
+  <a href="#prev" data-i18n="nv-prev">이전 경력</a>
+  <a href="#side" data-i18n="nv-side">사이드·AI</a>
 </nav>
 </div>
 
 <script>
+  /* ===== i18n : KO는 HTML 원문을 런타임에 캐싱, EN만 사전으로 관리 ===== */
+  const EN = {
+    name: 'Kevin Um <span class="en">엄홍인</span>',
+    role: 'Product Engineer · Full-stack (6 yrs)',
+    lead1: "Full-stack developer with 6 years of experience. I don't stop at building screens — I focus on growing products by validating hypotheses with data.",
+    lead2: 'After Studio Heynuts (Head of Development) and Plang (Frontend Lead), I joined Summitplay as lead developer and went on to serve as <strong>CTO</strong>. I built apps and web with React Native, React, and TypeScript, and owned the full service lifecycle — from Firebase-based backends and deployment automation to planning and operations.',
+    lead3: 'What I value most is <strong>data-driven decision making</strong>. I introduced Mixpanel myself to analyze user flows and rapidly validate hypotheses. For example, I redesigned a remix-contest web service based on data analysis, cutting the landing-page bounce rate from 52% to half and doubling MAU within a month.',
+    lead4: 'Recently I focus on <strong>integrating AI into the development process</strong>. I built a multi-agent development pipeline and deployment automation, and created tools that automate repetitive work — such as a service that extracts and summarizes audio from video to auto-generate learning content.',
+    lead5: 'I aim to be a developer who turns complex problems into simple structures and raises the whole team’s productivity — one who makes technology translate into real business value.',
+
+    'sl-ach': 'Highlights',
+    ach1k: 'Free-reservation success 99.6%', ach1v: 'Core in-store music reservation flow — attempt→success 99.63%, avg 4s, 0.37% failure rate',
+    ach2k: 'Free reservations grew 5.1×', ach2v: '~1,600 → ~8,200 per week, held stable for 6 months after peak',
+    ach3k: 'Remix web redesign', ach3v: 'Data-driven redesign cut landing bounce 52%→half, 2× MAU in one month',
+    ach4k: 'App MAU growth', ach4v: 'Staged monetization experiments: community 5k → track auction 7k → remix contest 15k',
+    ach5k: 'Unified backend for 5 services', ach5v: 'Client, ads, admin, partners, and public API consolidated into a single backend',
+    ach6k: 'Zero-downtime DB migration', ach6v: 'Migrated a live RTDB → Firestore with dual-write, no service interruption',
+
+    'sl-career': 'Experience',
+    c1per: '2021.11 ~ 2026.04 · 4 yrs 6 mos', c1h3: 'Summitplay', c1org: 'Frontend → Lead → PM → CTO (2023.05)',
+    c1l1: 'Designed, built, and operated the app, web, and server of a music/track reservation platform almost single-handedly',
+    c1l2: 'Introduced Mixpanel and drove MAU growth through data-driven, staged monetization experiments',
+    c1l3: 'Led the product’s evolution: mobile app → web transition → unified platform (Teurabwa)',
+    c2per: '2021.06 ~ 2021.10', c2h3: 'Plang', c2org: 'Frontend Lead',
+    c2l1: 'Data-driven development with Mixpanel; B2B web (React, Redux, Firebase Hosting, GitHub Actions CI/CD, NIVO)',
+    c2l2: 'Led legacy JS→TypeScript and Class→Function component migration; introduced the Container-Presenter pattern',
+    c3per: '2019.10 ~ 2021.05', c3h3: 'Studio Heynuts', c3org: 'Head of Development',
+    c3p: 'Joined as the first developer; full-stack SI with React + Redux + Firebase + Node. Trained in-house developers, built the team, and led products to completion as PM.',
+
+    'sl-journey': 'Tech Journey',
+    j1h: '2019–2021 · Full-stack SI <span class="org">Studio Heynuts</span>', j1p: 'Built client projects with React + Firebase + Node. Joined as first developer; built and trained the team.',
+    j2h: '2021 · Data-driven development <span class="org">Plang</span>', j2p: 'Mixpanel-based operations & improvements, B2B web (CI/CD, NIVO), JS→TS and component migration.',
+    j3h: '2021–2023 · Mobile app (RN) <span class="org">Summitplay I</span>', j3p: 'Track-trading & community app. Prototype → main app → renewal.',
+    j4h: '2022–2025 · Web transition + Firebase infra <span class="org">Summitplay II</span>', j4p: 'Remix-contest platform, marketplace e-contracts, backend server build-out.',
+    j5h: '2024–2026 · Unified platform <span class="org">Summitplay III</span>', j5p: 'Client, admin, partners + ads + unified backend. Solo full-stack lead.',
+
+    'sl-pserver': 'Project<br>Unified Server',
+    'ps-h3': 'Music Reservation Platform — Unified Server <span class="org">· backend · solo</span>',
+    'ps-bg': '<b>Context</b> Five services — client, ads, admin, partners, and public API — shared a single backend, and the legacy RTDB had limits in cost and query scalability.',
+    'ps-done': '<b>What I did</b> Consolidated the five services into one Firebase Functions backend split by domain routers. Designed a zero-downtime migration from the live RTDB to Firestore using dual-write mirroring. Automated repetitive tasks — reservations, settlements, ad videos — with schedulers and triggers.',
+    'ps-res': '<b>Result</b> Carried out the migration with no service interruption, and eliminated a scheduler memory (OOM) bloat that had caused duplicate executions.',
+    'ps-chips': '<span class="chip">Firebase Functions + Express</span><span class="chip">RTDB + Firestore dual-write</span><span class="chip">TossPayments</span>',
+
+    'sl-pclient': 'Project<br>Music Reservation',
+    'pc-h3': 'In-store Music Reservation Service <span class="org">· React · solo</span>',
+    'pc-bg': '<b>Context</b> The core flow where customers enter a store via QR and reserve music. Entry points — store, playlist, search — all differed, so behavior and error handling diverged per path, making maintenance hard.',
+    'pc-done': '<b>What I did</b> Unified all entry points into a single reservation-gateway component. Split payment state transitions (approved/completed/failed) into pages. Applied PWA and per-store dynamic pricing.',
+    'pc-res': '<b>Result</b> Achieved a consistent reservation experience regardless of entry path.',
+    'pc-metric': 'Free reservation attempt→success 99.6% · avg 4s · sustained through 5× traffic growth',
+    'pc-chips': '<span class="chip">React 18</span><span class="chip">Redux Toolkit</span><span class="chip">Toss Payment Widget</span><span class="chip">PWA (Workbox)</span>',
+
+    'sl-pads': 'Project<br>Ad Campaign',
+    'pa-h3': 'Ad Campaign Service <span class="org">· React · solo</span>',
+    'pa-bg': '<b>Context</b> Advertisers needed a B2B tool to create campaigns, track performance, and pay for ads.',
+    'pa-done': '<b>What I did</b> Structured the complex campaign-creation process into a step-by-step wizard (routes). Visualized performance by campaign type (Premium/Basic/JustPlay) with charts. Integrated payments via TossPayments SDK v2.',
+    'pa-res': '<b>Result</b> Delivered a dashboard that lets advertisers grasp performance intuitively, plus an end-to-end payment flow.',
+    'pa-chips': '<span class="chip">React 18</span><span class="chip">Recharts</span><span class="chip">Nivo</span><span class="chip">Toss SDK v2</span>',
+
+    'sl-pmobile': 'Project<br>Mobile App',
+    'pm-h3': 'Music Artist–Fan Mobile App <span class="org">· React Native · co-dev (solo on renewal)</span>',
+    'pm-bg': '<b>Context</b> An app combining an artist/fan community with track trading was the company’s early flagship product.',
+    'pm-done': '<b>What I did</b> Built real-time track auctions, e-signatures for transfer/assignment contracts, chat & comments, social login (Apple/Google/Kakao), FCM push & deep linking, and video/audio playback. Involved from prototype through the main app and its renewal.',
+    'pm-res': '<b>Result</b> Drove MAU growth from 5k → 15k through staged monetization experiments.',
+    'pm-chips': '<span class="chip">React Native</span><span class="chip">Real-time track auction</span><span class="chip">E-signature</span><span class="chip">Real-time chat</span><span class="chip">FCM</span>',
+
+    'sl-premix': 'Project<br>Remix Contest',
+    'pr-h3': 'Remix Contest Platform <span class="org">· React · solo</span>',
+    'pr-bg': '<b>Context</b> To promote the market for unreleased tracks, we needed a music contest where people compete by remixing original songs.',
+    'pr-done': '<b>What I did</b> Solo-built a competition platform: host a contest → users upload their remixes → producers judge and rank them (remix submission, judging, ranking — skiomusic-style).',
+    'pr-res': '<b>Result</b> A data-driven redesign cut landing bounce 52%→half and doubled MAU in one month — driving app MAU to 15k.',
+
+    'sl-psupport': 'Project<br>Others (solo)',
+    su1h: 'Marketplace Onboarding Contract Web <span class="org">· React</span>',
+    su1d: '<b>What I did</b> Solo-built the store onboarding & contract web. Implemented a legally binding document flow — contract management, <strong>e-signatures</strong>, and access-history tracking.',
+    su2h: 'Teurabwa Admin <span class="org">· React</span>',
+    su2d: '<b>What I did</b> Solo-built an operations admin to manage ads, banners, campaigns, artists, and reward items in one place.',
+    su3h: 'Teurabwa Partners <span class="org">· React</span>',
+    su3d: '<b>What I did</b> Solo-built a B2B web where store owners manage their own stores.',
+
+    'sl-prev': 'Earlier<br>Plang · Heynuts',
+    pv1h3: 'B2B Data Web · App Modernization <span class="org">· Plang · Frontend Lead</span>',
+    pv1bg: '<b>Context</b> We operated several products — internal, customer, school, and teacher facing — that needed data-driven improvement, while the legacy JS/Class-component code made collaboration and onboarding hard.',
+    pv1done: '<b>What I did</b> Used Mixpanel to analyze user flows and prioritize improvements, and led the legacy JS→TypeScript and Class→Function migration. Built the B2B web with React/Redux, set up CI/CD with Firebase Hosting + GitHub Actions, and visualized data with NIVO. Applied the Container-Presenter pattern.',
+    pv1res: '<b>Result</b> Improved collaboration and onboarding efficiency through a data-driven improvement cycle and code modernization.',
+    pv1chips: '<span class="chip">React · Redux</span><span class="chip">TypeScript migration</span><span class="chip">GitHub Actions CI/CD</span><span class="chip">NIVO</span>',
+    pv2h3: 'Full-stack SI · Team Building <span class="org">· Studio Heynuts · Head of Development</span>',
+    pv2bg: '<b>Context</b> Joining a design studio as its first developer, I had to build client projects from zero and create the development organization.',
+    pv2done: '<b>What I did</b> Full-stack development of web, app, and server with React/Redux + Firebase/Node.js. Trained in-house staff to form a team and led projects as PM.',
+    pv2major: '<b>Highlights</b> <strong>Project Question</strong> — a journalist crowdfunding platform (solo-built client web, admin office, and server; payment server, auto funding-close & stats schedulers, PG integration). <strong>Post-it</strong> — a preference-based recommendation SNS (app, store web, office; preference-scoring recommendation algorithm, API, DevOps, PM). Plus Chwihyang Salon (B2C commerce & payments for seniors), Steadee, and more.',
+    pv2chips: '<span class="chip">React · React Native</span><span class="chip">Firebase · Node.js</span><span class="chip">Crowdfunding · payment server</span><span class="chip">Recommendation algorithm</span><span class="chip">Team building · PM</span>',
+
+    'sl-side': 'Side<br>Automation · AI',
+    sd1h: 'AI Auto-generated Learning Content',
+    sd1bg: '<b>Context</b> I wanted to help a friend who works as an instructor prepare lessons.',
+    sd1done: '<b>What I did</b> Built a pipeline that extracts audio from YouTube videos, transcribes it with OpenAI Whisper (STT), then auto-generates concept explanations and true/false quizzes with GPT.',
+    sd2h: 'No-code App Builder',
+    sd2bg: '<b>Context</b> I wanted anyone to be able to build an app without knowing how to code.',
+    sd2done: '<b>What I did</b> A theme component system and code generator that auto-generate and build React Native app source from configuration values. Also explored converting Figma designs into RN.',
+    sd3h: 'Greenish — Eco Magazine + Zero-waste Market',
+    sd3done: '<b>What I did</b> Built a magazine for writing and publishing environmental articles plus a curated eco-store market. Separated the authoring and public web for multi-target operation, and prioritized accessibility (dark mode, fonts).',
+
+    'nv-g1': 'Overview', 'nv-ach': 'Highlights', 'nv-career': 'Experience', 'nv-journey': 'Tech Journey',
+    'nv-g2': 'Projects', 'nv-pserver': 'Unified Server', 'nv-pclient': 'Music Reservation', 'nv-pads': 'Ad Campaign',
+    'nv-pmobile': 'Mobile App', 'nv-premix': 'Remix Contest', 'nv-psupport': 'Others', 'nv-prev': 'Earlier', 'nv-side': 'Side · AI'
+  };
+
+  const META = {
+    ko: { title: '엄홍인 — 포트폴리오', desc: '엄홍인(Kevin) · 6년차 풀스택 개발자 포트폴리오 — React · React Native · TypeScript · Firebase' },
+    en: { title: 'Kevin Um — Portfolio', desc: 'Kevin Um · Full-stack developer (6 yrs) portfolio — React · React Native · TypeScript · Firebase' }
+  };
+
+  const i18nEls = [...document.querySelectorAll('[data-i18n]')];
+  const KO = {};
+  i18nEls.forEach(el => { KO[el.dataset.i18n] = el.innerHTML; });
+
+  function applyLang(lang){
+    const dict = lang === 'en' ? EN : KO;
+    i18nEls.forEach(el => {
+      const v = dict[el.dataset.i18n];
+      if (v != null) el.innerHTML = v;
+    });
+    document.documentElement.lang = lang;
+    const m = META[lang] || META.ko;
+    document.title = m.title;
+    const md = document.getElementById('meta-desc');
+    if (md) md.setAttribute('content', m.desc);
+    document.querySelectorAll('.lang-toggle button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+  }
+
+  function initialLang(){
+    let saved = null;
+    try { saved = localStorage.getItem('lang'); } catch(e) {}
+    if (saved === 'ko' || saved === 'en') return saved;
+    return (navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en';
+  }
+
+  document.querySelectorAll('.lang-toggle button').forEach(b => {
+    b.addEventListener('click', () => applyLang(b.dataset.lang));
+  });
+  applyLang(initialLang());
+
+  /* ===== nav 스크롤 하이라이트 (DOM 구조 불변, 텍스트만 교체되므로 그대로 동작) ===== */
   const links=[...document.querySelectorAll('nav a')];
   const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
   const obs=new IntersectionObserver((es)=>{
